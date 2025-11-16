@@ -1,16 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+body{
+  background-color: #ffe0cbf6;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  font-family: Quicksand, sans-serif;
+  margin-top: 5vh;
 }
 
 .App-header {
@@ -24,15 +21,28 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+
+button{
+  background-color: #a5a5a5;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 500;
+}
+button:hover {
+  box-shadow: black 5px 5px 0px 0px;
+  transform: translateY(-2px) translateX(-2px);
+  background-color: #c5c5c5;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+span {
+  font-size: clamp(0.5rem, 2vw, 1rem);
 }
