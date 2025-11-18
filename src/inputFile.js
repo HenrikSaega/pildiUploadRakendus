@@ -1,7 +1,7 @@
 import { notify } from "./notification";
 import { useRef, useState } from "react";
 
-function UploadButton(){
+function UploadButton({onUpload }){
     const inputRef = useRef(null);
     const [file, setFile] = useState(null);
 
@@ -10,39 +10,41 @@ function UploadButton(){
     }
 
     const upload = async () => {
-        const data = new FormData();
-        data.append("image", file);
-        const res = await fetch("http://localhost:3001/upload", {
-          method: "POST",
-          body: data
-        });
+      if (!file) return;
 
-        const json = await res.json();
-        console.log("Üles laaditud:", json);
-        notify("Pilt edukalt üles laetud!");
+      const data = new FormData();
+      data.append("image", file);
+
+      const res = await fetch("http://localhost:3001/upload", {
+        method: "POST",
+        body: data
+      });
+
+      const json = await res.json();
+      notify("Pilt edukalt üles laetud!");
+
+      onUpload?.(json.url);
     };
 
     return (
-        <div>
-          <input
-            type="file"
-            ref={inputRef}
-            style={{ display: "none" }}
-            onChange={(e) => setFile(e.target.files[0])}
-            
-          />
+      <div>
+        <input
+          type="file"
+          ref={inputRef}
+          style={{ display: "none" }}
+          onChange={(e) => setFile(e.target.files[0])}
+        />
+        
+        <button className="upload-nupp" onClick={openFilePicker}>
+          Vali pilt
+        </button>
 
-          <button className="upload-nupp" onClick={openFilePicker}>
-            Vali pilt
+        {file && (
+          <button className="upload-nupp" onClick={upload}>
+            Lae üles
           </button>
-
-          {/* Üleslaadimise nupp */}
-          {file && (
-            <button className="upload-nupp" onClick={upload}>
-              Lae üles
-            </button>
-          )}
-        </div>
+        )}
+      </div>
     );
 } 
 export default UploadButton;
