@@ -22,7 +22,7 @@ body{
 }
 
 
-button{
+.upload-nupp{
   background-color: #a5a5a5;
   border: none;
   color: white;
@@ -36,13 +36,28 @@ button{
   transition: 0.2s ease;
   font-size: clamp(1rem, 2vw, 1.5rem);
   font-weight: 500;
+  border: none;
 }
-button:hover {
+.upload-nupp:hover {
   box-shadow: black 5px 5px 0px 0px;
-  transform: translateY(-2px) translateX(-2px);
+  transform: translateY(-5px) translateX(-5px);
   background-color: #c5c5c5;
 }
 
 span {
   font-size: clamp(0.5rem, 2vw, 1rem);
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #333;
+  color: rgb(94, 255, 0);
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  z-index: 1000;
+  box-shadow: rgb(187, 171, 171) 3px 3px 0px 0px;
 }

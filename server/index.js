@@ -39,4 +39,21 @@ app.get("/images", (req, res) => {
   });
 });
 
+app.delete("/delete/:filename", (req, res) => {
+  const filename = req.params.filename;
+  const filePath = path.join(__dirname, "uploads", filename);
+
+  // Kontrolli, kas fail on olemas
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ error: "Faili ei leitud" });
+  }
+
+  // Kustuta fail
+  fs.unlink(filePath, (err) => {
+    if (err) return res.status(500).json({ error: "Kustutamine ebaõnnestus" });
+    res.json({ success: true, name: filename });
+  });
+});
+
+
 app.listen(3001, () => console.log("Localhost server töötab port 3001"));

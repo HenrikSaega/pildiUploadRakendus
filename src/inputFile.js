@@ -1,17 +1,17 @@
-import {useRef, useState} from "react"
+import { notify } from "./notification";
+import { useRef, useState } from "react";
 
 function UploadButton(){
     const inputRef = useRef(null);
     const [file, setFile] = useState(null);
 
     const openFilePicker = () =>{
-        inputRef.current.click();
+      inputRef.current.click();
     }
 
     const upload = async () => {
         const data = new FormData();
         data.append("image", file);
-
         const res = await fetch("http://localhost:3001/upload", {
           method: "POST",
           body: data
@@ -19,6 +19,7 @@ function UploadButton(){
 
         const json = await res.json();
         console.log("Üles laaditud:", json);
+        notify("Pilt edukalt üles laetud!");
     };
 
     return (
@@ -28,15 +29,16 @@ function UploadButton(){
             ref={inputRef}
             style={{ display: "none" }}
             onChange={(e) => setFile(e.target.files[0])}
+            
           />
 
-          <button onClick={openFilePicker}>
+          <button className="upload-nupp" onClick={openFilePicker}>
             Vali pilt
           </button>
 
           {/* Üleslaadimise nupp */}
           {file && (
-            <button onClick={upload}>
+            <button className="upload-nupp" onClick={upload}>
               Lae üles
             </button>
           )}
